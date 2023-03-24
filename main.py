@@ -41,16 +41,7 @@ def get_random_cafe():
     random_offset = random.randint(0, row_count-1)
     # Return the first record after skipping random_offset rows
     random_cafe = Cafe.query.offset(random_offset).first()
-    # return jsonify(cafe = {"name": random_cafe.name,
-    #             "map_url": random_cafe.map_url,
-    #             "img_url": random_cafe.img_url,
-    #             "location": random_cafe.location,
-    #             "seats": random_cafe.seats,
-    #             "has_toilet": random_cafe.has_toilet,
-    #             "has_wifi": random_cafe.has_wifi,
-    #             "has_sockets": random_cafe.has_sockets,
-    #             "can_take_calls": random_cafe.can_take_calls,
-    #             "coffee_price": random_cafe.coffee_price})
+
     return jsonify(cafe=random_cafe.to_dict())
 
 ## HTTP GET - Read Record
@@ -118,4 +109,4 @@ def delete_cafe(cafe_id):
         return jsonify(error={"Forbidden": "You dont have permission to perform this action. Make sure you are using correct api_key."})
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run()
